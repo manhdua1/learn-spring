@@ -1,0 +1,24 @@
+meta {
+  name: getUser
+  type: http
+  seq: 3
+}
+
+put {
+  url: http://localhost:8080/identity/users/c439dfd6-b5a6-4fb8-a203-62e47cc1ffc1
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "password": "lienMinh",
+    "firstName": "lienMinh",
+    "lastName": "LOL"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
