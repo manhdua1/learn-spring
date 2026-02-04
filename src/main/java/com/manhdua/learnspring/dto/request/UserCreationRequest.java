@@ -1,9 +1,14 @@
 package com.manhdua.learnspring.dto.request;
 
+import jakarta.validation.constraints.Size;
+
 import java.time.LocalDate;
 
 public class UserCreationRequest {
+    @Size(min = 3, message = "Username must be at lest 3 characters")
     private String userName;
+
+    @Size(min = 8, message = "Password must be at least 8 characters.")
     private String password;
     private String firstName;
     private String lastName;

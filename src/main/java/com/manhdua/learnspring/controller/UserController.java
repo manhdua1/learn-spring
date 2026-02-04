@@ -4,6 +4,7 @@ import com.manhdua.learnspring.dto.request.UserCreationRequest;
 import com.manhdua.learnspring.dto.request.UserUpdateRequest;
 import com.manhdua.learnspring.entity.User;
 import com.manhdua.learnspring.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +18,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    User createUser(@RequestBody UserCreationRequest userCreationRequest) {
+    User createUser(@RequestBody @Valid UserCreationRequest userCreationRequest) {
         return userService.createUser(userCreationRequest);
     }
 
@@ -37,7 +38,8 @@ public class UserController {
     }
 
     @DeleteMapping("/{userId}")
-    void deleteUser(@PathVariable UUID userId) {
+    String deleteUser(@PathVariable UUID userId) {
         userService.deleteUser(userId);
+        return "User has been deleted";
     }
 }
