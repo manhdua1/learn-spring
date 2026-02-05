@@ -1,5 +1,6 @@
 package com.manhdua.learnspring.controller;
 
+import com.manhdua.learnspring.dto.request.ApiResponse;
 import com.manhdua.learnspring.dto.request.UserCreationRequest;
 import com.manhdua.learnspring.dto.request.UserUpdateRequest;
 import com.manhdua.learnspring.entity.User;
@@ -18,8 +19,10 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    User createUser(@RequestBody @Valid UserCreationRequest userCreationRequest) {
-        return userService.createUser(userCreationRequest);
+    ApiResponse<User> createUser(@RequestBody @Valid UserCreationRequest userCreationRequest) {
+        ApiResponse<User> apiResponse = new ApiResponse<>();
+        apiResponse.setResult(userService.createUser(userCreationRequest));
+        return apiResponse;
     }
 
     @GetMapping

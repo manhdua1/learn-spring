@@ -3,6 +3,8 @@ package com.manhdua.learnspring.service;
 import com.manhdua.learnspring.dto.request.UserCreationRequest;
 import com.manhdua.learnspring.dto.request.UserUpdateRequest;
 import com.manhdua.learnspring.entity.User;
+import com.manhdua.learnspring.exception.AppException;
+import com.manhdua.learnspring.exception.ErrorCode;
 import com.manhdua.learnspring.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +21,7 @@ public class UserService {
         User user = new User();
 
         if (userRepository.existsByUserName(request.getUserName())) {
-            throw new RuntimeException("Username existed");
+            throw new AppException(ErrorCode.USER_EXISTED);
         }
 
         user.setUserName(request.getUserName());
@@ -38,7 +40,7 @@ public class UserService {
 
     public User getUser(UUID id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
     }
 
     public User updateUser(UUID userId, UserUpdateRequest request) {

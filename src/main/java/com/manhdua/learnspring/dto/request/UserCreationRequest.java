@@ -1,14 +1,15 @@
 package com.manhdua.learnspring.dto.request;
 
+import com.manhdua.learnspring.exception.ErrorCode;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 
 public class UserCreationRequest {
-    @Size(min = 3, message = "Username must be at lest 3 characters")
+    @Size(min = 3, message = "USERNAME_INVALID")
     private String userName;
 
-    @Size(min = 8, message = "Password must be at least 8 characters.")
+    @Size(min = 8, message = "PASSWORD_INVALID")
     private String password;
     private String firstName;
     private String lastName;
