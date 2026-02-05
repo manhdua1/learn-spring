@@ -2,10 +2,15 @@ package com.manhdua.learnspring.service;
 
 import com.manhdua.learnspring.dto.request.UserCreationRequest;
 import com.manhdua.learnspring.dto.request.UserUpdateRequest;
+import com.manhdua.learnspring.dto.response.UserResponse;
 import com.manhdua.learnspring.entity.User;
 import com.manhdua.learnspring.exception.AppException;
 import com.manhdua.learnspring.exception.ErrorCode;
+import com.manhdua.learnspring.mapper.UserMapper;
 import com.manhdua.learnspring.repository.UserRepository;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,43 +18,37 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class UserService {
-    @Autowired
-    private UserRepository userRepository;
+    UserRepository userRepository;
+    UserMapper userMapper;
 
     public User createUser(UserCreationRequest request) {
-        User user = new User();
-
         if (userRepository.existsByUserName(request.getUserName())) {
             throw new AppException(ErrorCode.USER_EXISTED);
         }
 
-        user.setUserName(request.getUserName());
-        user.setFirstName(request.getFirstName());
-        user.setLastName(request.getLastName());
-        user.setPassword(request.getPassword());
-        user.setDob(request.getDob());
+        User user = userMapper.toUser(request);
 
-        userRepository.save(user);
-        return user;
+        return userRepository.save(user);
     }
 
     public List<User> getUsers() {
         return userRepository.findAll();
     }
 
-    public User getUser(UUID id) {
-        return userRepository.findById(id)
+    public UserResponse getUser(UUID id) {
+        User user = userRepository.findById(id)
                 .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
+        return userMapper.toUserResponse(user);
     }
 
     public User updateUser(UUID userId, UserUpdateRequest request) {
-        User user = getUser(userId);
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
 
-        user.setFirstName(request.getFirstName());
-        user.setLastName(request.getLastName());
-        user.setPassword(request.getPassword());
-        user.setDob(request.getDob());
+        userMapper.updateUser(user, request);
 
         return userRepository.save(user);
     }

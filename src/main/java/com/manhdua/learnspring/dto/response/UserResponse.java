@@ -1,21 +1,19 @@
-package com.manhdua.learnspring.dto.request;
+package com.manhdua.learnspring.dto.response;
 
-import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UserCreationRequest {
-    @Size(min = 3, message = "USERNAME_INVALID")
+public class UserResponse {
+    UUID id;
     String userName;
-
-    @Size(min = 8, message = "PASSWORD_INVALID")
     String password;
     String firstName;
     String lastName;

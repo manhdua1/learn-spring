@@ -3,6 +3,7 @@ package com.manhdua.learnspring.controller;
 import com.manhdua.learnspring.dto.request.ApiResponse;
 import com.manhdua.learnspring.dto.request.UserCreationRequest;
 import com.manhdua.learnspring.dto.request.UserUpdateRequest;
+import com.manhdua.learnspring.dto.response.UserResponse;
 import com.manhdua.learnspring.entity.User;
 import com.manhdua.learnspring.service.UserService;
 import jakarta.validation.Valid;
@@ -31,7 +32,7 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    User getUser(@PathVariable UUID userId) {
+    UserResponse getUser(@PathVariable UUID userId) {
         return userService.getUser(userId);
     }
 
