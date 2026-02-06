@@ -5,13 +5,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.Objects;
 
-@ControllerAdvice
+@RestControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     ResponseEntity<ApiResponse<Void>> handlingException(Exception e) {
+        e.printStackTrace();
+
         ApiResponse<Void> apiResponse = new ApiResponse<>();
 
         apiResponse.setCode(ErrorCode.UNCATEGORIZED_ERROR.getCode());

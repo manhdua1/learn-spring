@@ -1,0 +1,23 @@
+meta {
+  name: login
+  type: http
+  seq: 6
+}
+
+post {
+  url: http://localhost:8080/identity/auth/log-in
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "userName": "manhdua",
+    "password": "manhmanh0"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
