@@ -1,0 +1,22 @@
+meta {
+  name: introspect
+  type: http
+  seq: 7
+}
+
+post {
+  url: http://localhost:8080/identity/auth/introspect
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "token": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJtYW5oZHVhIiwic3ViIjoibWFuaGR1YSIsImV4cCI6MTc3MDUyOTIyOCwiY3VzdG9tQ2xhaW0iOiJDdXN0b20iLCJpYXQiOjE3NzA1MjU2Mjh9.9lHYC2K7oOp-sdPNRnvBux4Fh0TbLbnmcDzzS-v4xgcuYcM9KwZE2SOhdbuHL6Fwy-aOIGl3NFE6x68SDPk6mA"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
