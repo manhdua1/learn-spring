@@ -5,9 +5,13 @@ meta {
 }
 
 get {
-  url: http://localhost:8080/identity/users/c439dfd6-b5a6-4fb8-a203-62e47cc1f
+  url: http://localhost:8080/identity/users/642c1e49-ef7a-47b8-860b-8a7b153dca31
   body: none
-  auth: inherit
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJtYW5oZHVhIiwic3ViIjoiYWRtaW4iLCJleHAiOjE3NzIxNjQ2MzEsImlhdCI6MTc3MjE2MTAzMSwic2NvcGUiOiJBRE1JTiJ9.96herB0TYjx4UtOoG-GUnSL7QiBqn8qYzs6QjJ7cVFLrePAKLFkPtEvY68zkSs8rwCeObar4xAqKJKGHH8nkBA
 }
 
 settings {
